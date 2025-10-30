@@ -135,7 +135,9 @@ if upload_file is not None:
 
             # Use correct image path
             img_name = os.path.basename(filenames[indices[0][idx+1]])
-            img_path = os.path.join(dataset_images_path, img_name)
+            img_path = os.path.join("Dataset", "images", img_name)
+
+            
 
             if os.path.exists(img_path):
                 st.image(img_path, width=160)
