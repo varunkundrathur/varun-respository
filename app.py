@@ -79,7 +79,7 @@ else:
 # ============================
 @st.cache_resource
 def load_model_and_data():
-    Image_features = pkl.load(open(r'D:/VARUN/programming files/vs code/python/new fashion item generator/Dataset/Images_features.pkl', 'rb'))
+    Image_features = pkl.load(open(os.path.join("Dataset", "Images_features.pkl"), "rb"))
     filenames = pkl.load(open(r'D:/VARUN/programming files/vs code/python/new fashion item generator/Dataset/filenames.pkl', 'rb'))
     
     base_model = ResNet50(weights='imagenet', include_top=False, input_shape=(224,224,3))
