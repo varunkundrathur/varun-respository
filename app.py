@@ -134,8 +134,10 @@ if upload_file is not None:
             st.markdown(f"**Match #{idx+1}**")
 
             # Use correct image path
-            img_name = os.path.basename(filenames[indices[0][idx+1]])
-            img_path = os.path.join("Dataset", "images", img_name)
+            img_name = filenames[indices[0][idx+1]].replace("\\", "/")
+            img_path = os.path.join("Dataset", img_name)
+
+
 
             
 
