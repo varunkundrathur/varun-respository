@@ -78,18 +78,26 @@ else:
 # 🧠 MODEL LOADING
 # ============================
 @st.cache_resource
+@st.cache_resource
 def load_model_and_data():
+    import os, pickle as pkl
+    from tensorflow.keras.applications.resnet50 import ResNet50
+
     Image_features = pkl.load(open(os.path.join("Dataset", "Images_features.pkl"), "rb"))
-    filenames = pkl.load(open(r'D:/VARUN/programming files/vs code/python/new fashion item generator/Dataset/filenames.pkl', 'rb'))
-    
-    base_model = ResNet50(weights='imagenet', include_top=False, input_shape=(224,224,3))
+    filenames = pkl.load(open(os.path.join("Dataset", "filenames.pkl"), "rb"))
+
+    base_model = ResNet50(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
     base_model.trainable = False
-    model = tf.keras.models.Sequential([base_model, GlobalMaxPool2D()])
-    
-    neighbors = NearestNeighbors(n_neighbors=6, algorithm='brute', metric='euclidean')
+
+    model = tf.keras.Sequential([
+        base_model,
+        GlobalMaxPool2D()
+    ])
+
+    neighbors = NearestNeighbors(n_neighbors=5, algorithm='brute', metric='euclidean')
     neighbors.fit(Image_features)
-    
     return Image_features, filenames, model, neighbors
+
 
 dataset_path = r'D:/VARUN/programming files/vs code/python/new fashion item generator/Dataset'
 
