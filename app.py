@@ -23,7 +23,8 @@ st.set_page_config(
 # ============================
 # 🎨 BACKGROUND STYLE
 # ============================
-background_path = os.path.join("assets", "background.png")
+background_path = os.path.join(os.getcwd(), "background.png")
+
 
 @st.cache_data
 def get_base64_of_bin_file(bin_file):
