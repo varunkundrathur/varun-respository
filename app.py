@@ -72,7 +72,8 @@ def load_model_and_data():
     neighbors.fit(Image_features)
     return Image_features, filenames, model, neighbors
 
-dataset_path = os.path.join("Dataset")
+# Set correct dataset path
+dataset_images_path = os.path.join("Dataset", "images")
 
 # ============================
 # ⚙️ FEATURE EXTRACTION
@@ -131,9 +132,16 @@ if upload_file is not None:
     for idx, col in enumerate(cols):
         with col:
             st.markdown(f"**Match #{idx+1}**")
+
+            # Use correct image path
             img_name = os.path.basename(filenames[indices[0][idx+1]])
-            img_path = os.path.join("Dataset", img_name)
-            st.image(img_path, width=160)
+            img_path = os.path.join(dataset_images_path, img_name)
+
+            if os.path.exists(img_path):
+                st.image(img_path, width=160)
+            else:
+                st.warning(f"Image not found: {img_name}")
+
             similarity = max(0, (1 - distance[0][idx+1]) * 100)
             st.caption(f"✓ {similarity:.1f}% Similar")
 
